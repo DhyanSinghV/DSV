@@ -7,9 +7,24 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
       margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #85d8ce, #085078);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      text-align: center;
       padding: 20px;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      margin-bottom: 20px;
     }
     .screen {
       display: none;
@@ -18,36 +33,53 @@
       display: block;
     }
     button {
-      padding: 10px 20px;
+      padding: 15px 30px;
       margin: 10px;
       font-size: 16px;
       cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #007BFF;
+      color: #fff;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <!-- Screen 1 -->
+    <div id="screen1" class="screen active">
+      <h1>How are you feeling?</h1>
+      <button onclick="nextScreen('sad')">Sad</button>
+      <button onclick="nextScreen('happy')">Happy</button>
+    </div>
 
-  <!-- Screen 1 -->
-  <div id="screen1" class="screen active">
-    <h1>How are you feeling?</h1>
-    <button onclick="nextScreen('happy')">Happy</button>
-    <button onclick="nextScreen('sad')">Sad</button>
-  </div>
+    <!-- Screen 2 -->
+    <div id="screen2" class="screen">
+      <h1>Do you feel depressed or unsafe?</h1>
+      <button onclick="nextScreen('help')">Unsafe</button>
+      <button onclick="nextScreen('depressed')">Depressed</button>
+      <button onclick="reset()">Neither</button>
+    </div>
 
-  <!-- Screen 2 -->
-  <div id="screen2" class="screen">
-    <h1>Do you feel depressed or unsafe?</h1>
-    <button onclick="nextScreen('help')">Yes</button>
-    <button onclick="reset()">No</button>
-  </div>
+    <!-- Screen 3 -->
+    <div id="screen3" class="screen">
+      <h1>Call for Help</h1>
+      <p>If you need immediate help, please contact:</p>
+      <p><strong>Emergency: 911</strong></p>
+      <p><strong>Mental Health Helpline: 1-866-465-0083</strong></p>
+      <button onclick="reset()">Go Back</button>
+    </div>
 
-  <!-- Screen 3 -->
-  <div id="screen3" class="screen">
-    <h1>Call for Help</h1>
-    <p>If you need immediate help, please contact:</p>
-    <p><strong>Emergency: 911</strong></p>
-    <p><strong>Mental Health Helpline: 1-866-465-0083</strong></p>
-    <button onclick="reset()">Go Back</button>
+    <!-- Screen 4 -->
+    <div id="screen4" class="screen">
+      <h1>You're not alone.</h1>
+      <p>Please consider reaching out to a trusted friend, family member, or counselor. Support is available.</p>
+      <button onclick="reset()">Go Back</button>
+    </div>
   </div>
 
   <script>
@@ -55,7 +87,7 @@
       // Hide all screens
       document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
 
-      // Show the appropriate screen based on the user's choice
+      // Navigate to the appropriate screen
       if (option === 'happy') {
         alert("Great to hear you're feeling happy!");
         reset();
@@ -63,6 +95,8 @@
         document.getElementById('screen2').classList.add('active');
       } else if (option === 'help') {
         document.getElementById('screen3').classList.add('active');
+      } else if (option === 'depressed') {
+        document.getElementById('screen4').classList.add('active');
       }
     }
 
@@ -72,6 +106,5 @@
       document.getElementById('screen1').classList.add('active');
     }
   </script>
-
 </body>
 </html>
