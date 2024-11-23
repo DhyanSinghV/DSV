@@ -1,44 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>My fav sunset
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mental Health Check</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    .screen {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
 
-        <style>
-            img {
-                width: 680px;
-                height: auto;
-            }
-        </style>
-        </title>
-    </head>
-    <body>
-        <h1>My Cool Website</h1>
-        <p>I know HTML is neat</p>
+  <!-- Screen 1 -->
+  <div id="screen1" class="screen active">
+    <h1>How are you feeling?</h1>
+    <button onclick="nextScreen('happy')">Happy</button>
+    <button onclick="nextScreen('sad')">Sad</button>
+  </div>
 
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Anatomy_of_a_Sunset-2.jpg/2560px-Anatomy_of_a_Sunset-2.jpg">
+  <!-- Screen 2 -->
+  <div id="screen2" class="screen">
+    <h1>Do you feel depressed or unsafe?</h1>
+    <button onclick="nextScreen('help')">Yes</button>
+    <button onclick="reset()">No</button>
+  </div>
 
-        <blockquote> " I looked "</blockquote>
-        <button onClick ="changeQuote()">Change the quote</button>
+  <!-- Screen 3 -->
+  <div id="screen3" class="screen">
+    <h1>Call for Help</h1>
+    <p>If you need immediate help, please contact:</p>
+    <p><strong>Emergency: 911</strong></p>
+    <p><strong>Mental Health Helpline: 1-866-465-0083</strong></p>
+    <button onclick="reset()">Go Back</button>
+  </div>
 
-        <script>
-            var index = 0;
-            function changeQuote() {
-                var quotes = [
-                    '"I really like web devolopment! - Dhyan',
-                    '"I am enjoying my time at hammer hakcs! - DHyan',
-                    '"gg',
-                    '"no maybe yes',
-                ]
+  <script>
+    function nextScreen(option) {
+      // Hide all screens
+      document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
 
-                var blockquote = document.querySelector("blockquote");
-                blockquote.innerHTML = quotes[index];
+      // Show the appropriate screen based on the user's choice
+      if (option === 'happy') {
+        alert("Great to hear you're feeling happy!");
+        reset();
+      } else if (option === 'sad') {
+        document.getElementById('screen2').classList.add('active');
+      } else if (option === 'help') {
+        document.getElementById('screen3').classList.add('active');
+      }
+    }
 
-                index++;
-                if (index>= 4){
-                    index = 0;
-                }
-            }
+    function reset() {
+      // Reset to the first screen
+      document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+      document.getElementById('screen1').classList.add('active');
+    }
+  </script>
 
-        </script>
-    </body>
+</body>
 </html>
